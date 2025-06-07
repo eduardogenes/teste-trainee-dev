@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../shared/models/todo.model';
 import { TodoService } from '../shared/services/todo.service';
 
+// Componente principal da aplicação
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',

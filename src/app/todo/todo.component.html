@@ -1,14 +1,19 @@
 <div class="todo-container">
+  <!-- formulário de adição de tarefas -->
   <div class="todo-form">
     <app-new-task></app-new-task>
   </div>
   <div class="todo-buttons">
+    <!-- botão para alternar a visibilidade das tarefas concluídas -->
     <button class="toggle-button" (click)="toggleCompletedTasks()">
       {{ showCompletedTasks ? 'Exibir Tarefas Concluídas' : 'Ocultar Tarefas Concluídas' }}
     </button>
+    <!-- botão para limpar as tarefas concluídas -->
     <button (click)="clearCompletedTasks()">Limpar Tarefas Concluídas</button>
+    <!-- botão para limpar todas as tarefas -->
     <button (click)="clearAll()" [innerHTML]="labelClearAll"></button>
   </div>
+  <!-- lista de tarefas -->
   <div class="todo-list_container">
     <div class="todo-list_todo">
       <app-todo-item

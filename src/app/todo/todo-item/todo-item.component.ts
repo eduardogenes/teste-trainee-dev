@@ -13,12 +13,14 @@ export class TodoItemComponent {
 
   constructor(private todoService: TodoService) {}
 
+  // remove a tarefa
   deleteTodo(): void {
     if (confirm('Are you sure you want to delete this task?')) {
       this.todoService.deleteTodo(this.todo.id);
     }
   }
 
+  // atualiza a tarefa
   onTaskChecked(): void {
     this.todoService.updateTodo(this.todo);
   }

@@ -13,13 +13,21 @@ export class NewTaskComponent {
   constructor(private todoService: TodoService) { }
 
   addTask() {
+    // verifica se o campo está vazio
+    if (this.newTaskTitle.trim() === '') {
+      alert('Por favor, insira um título para a tarefa.');
+      return;
+    }
+
     const newTodo: Todo = {
       id: this.todoService.getTodoNewId(),
       title: this.newTaskTitle,
       completed: false
     };
 
+    // adiciona a tarefa
     this.todoService.addTodo(newTodo);
     this.newTaskTitle = '';
+
   }
 }

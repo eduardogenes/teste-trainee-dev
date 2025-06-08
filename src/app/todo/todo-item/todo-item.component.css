@@ -6,10 +6,9 @@
 
 .todo-item_content {
   display: flex;
-  align-items: baseline;
-  gap: rem;
-  margin-right: 1rem;
-  /* border: 1px solid #1515e7; */
+  align-items: center;
+  /* gap: 0.5rem; */
+  margin-left: 0.5rem;
 }
 
 .todo-item_content label {
@@ -33,6 +32,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .todo-item_edit{

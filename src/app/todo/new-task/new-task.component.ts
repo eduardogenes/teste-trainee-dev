@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Todo } from '../../shared/models/todo.model';
 import { TodoService } from '../../shared/services/todo.service';
 
@@ -8,10 +8,24 @@ import { TodoService } from '../../shared/services/todo.service';
   styleUrls: ['./new-task.component.css']
 })
 // componente para adicionar uma nova tarefa
-export class NewTaskComponent {
+export class NewTaskComponent implements AfterViewInit {  
   newTaskTitle: string = '';
 
+  @ViewChild('newTaskInput') newTaskInput!: ElementRef<HTMLInputElement>;
+
   constructor(private todoService: TodoService) { }
+
+  ngAfterViewInit() {
+    // foca no input assim que o componente aparece
+    this.focusInput();
+  }
+
+  focusInput() {
+    // Pequeno delay para garantir que o input já foi renderizado
+    setTimeout(() => {
+      this.newTaskInput.nativeElement.focus();
+    });
+  }
 
   addTask() {
     if (this.newTaskTitle.trim() === '') {
@@ -26,6 +40,6 @@ export class NewTaskComponent {
 
     this.todoService.addTodo(newTodo);
     this.newTaskTitle = '';
-
+    this.focusInput(); // foca novamente após adicionar
   }
 }

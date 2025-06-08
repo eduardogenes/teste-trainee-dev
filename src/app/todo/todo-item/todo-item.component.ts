@@ -10,6 +10,9 @@ import { TodoService } from '../../shared/services/todo.service';
 export class TodoItemComponent {
   @Input() todo!: Todo;
   @Output() deletedTodo: EventEmitter<number> = new EventEmitter<number>();
+  @Output() updatedTodo = new EventEmitter<Todo>();  // Novo evento para atualização
+  isEditing = false;  // Controla se está no modo edição
+  editTitle = '';     // Armazena o título em edição
 
   constructor(private todoService: TodoService) {}
 
@@ -24,4 +27,26 @@ export class TodoItemComponent {
   onTaskChecked(): void {
     this.todoService.updateTodo(this.todo);
   }
+
+  // ativa o modo de edição
+  startEditing(): void {
+    this.isEditing = true;
+    this.editTitle = this.todo.title;
+  }
+
+  // Salva as alterações
+  saveEdit(): void {
+    const newTitle = this.editTitle.trim();
+    if (newTitle) {  // Só salva se não estiver vazio
+      this.todo.title = newTitle;
+      this.updatedTodo.emit(this.todo);  // Notifica o componente pai
+      this.isEditing = false;
+    }
+  }
+
+  // Cancela a edição
+  cancelEdit(): void {
+    this.isEditing = false;
+  }
+
 }

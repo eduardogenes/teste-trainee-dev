@@ -6,16 +6,43 @@
       type="checkbox" [(ngModel)]="todo.completed"
       (change)="onTaskChecked()"
     />
-    <label
-      for="task-{{ todo.id }}"
-      [ngClass]="{'completed': todo.completed, 'incomplete': !todo.completed}"
-    >{{ todo.title }}</label>
+
+    <!-- Input para edição --> 
+    <input
+    *ngIf="isEditing"
+    type="text"
+    [(ngModel)]="editTitle"
+    (keyup.enter)="saveEdit()"
+    (blur)="saveEdit()"
+    (keyup.escape)="cancelEdit()"
+    class="edit-input"
+    #editInput
+    (click)="$event.stopPropagation()"
+  >
+
+    <!-- Título normal (visível quando não está editando) -->
+    <label 
+      *ngIf="!isEditing" 
+      (dblclick)="startEditing()"
+      class="todo-title"
+    >
+      {{ todo.title }}
+    </label>
   </div>
+
+  <!-- Botões de ação -->
   <div class="todo-item_actions">
-    <button class="todo-item_edit">
+    <!-- Botão Editar (visível apenas quando não está editando) -->
+    <button 
+      *ngIf="!isEditing" 
+      (click)="startEditing()" 
+      class="todo-item_edit"
+    >
       <i class="fas fa-edit fa-lg"></i> Editar
     </button>
-    <button class="todo-item_delete" (click)="deleteTodo()">
+    
+    <!-- Botão Remover -->
+    <button (click)="deleteTodo()" class="todo-item_delete">
       <i class="fas fa-trash-alt fa-lg"></i> Remover
     </button>
   </div>

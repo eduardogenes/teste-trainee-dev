@@ -51,3 +51,32 @@
 .fa-trash-alt:hover {
   color: rgba(65, 63, 63, 0.62);
 }
+
+/* Estilo para o input de edição */
+.edit-input {
+  border: 1px solid #ddd;
+  padding: 0.3rem;
+  border-radius: 3px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+/* Faz o título ocupar todo o espaço disponível */
+.todo-title {
+  flex-grow: 1;
+  cursor: text;  /* Mostra o cursor de texto ao passar o mouse */
+}
+
+/* Garante que o conteúdo ocupe todo o espaço */
+.todo-item_content {
+  flex-grow: 1;
+  min-width: 0;  /* Permite que o texto quebre */
+  max-width: 77%;
+}
+
+/* Estilo para o texto cortado com reticências */
+.todo-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -7,25 +7,23 @@ import { TodoService } from '../../shared/services/todo.service';
   templateUrl: './new-task.component.html',
   styleUrls: ['./new-task.component.css']
 })
+// componente para adicionar uma nova tarefa
 export class NewTaskComponent {
   newTaskTitle: string = '';
 
   constructor(private todoService: TodoService) { }
 
   addTask() {
-    // verifica se o campo está vazio
     if (this.newTaskTitle.trim() === '') {
       alert('Por favor, insira um título para a tarefa.');
       return;
     }
-
     const newTodo: Todo = {
       id: this.todoService.getTodoNewId(),
       title: this.newTaskTitle,
-      completed: false
+      completed: false 
     };
 
-    // adiciona a tarefa
     this.todoService.addTodo(newTodo);
     this.newTaskTitle = '';
 

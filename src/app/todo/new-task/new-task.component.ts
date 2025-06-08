@@ -32,13 +32,19 @@ export class NewTaskComponent implements AfterViewInit {
       alert('Por favor, insira um título para a tarefa.');
       return;
     }
-    const newTodo: Todo = {
-      id: this.todoService.getTodoNewId(),
-      title: this.newTaskTitle,
-      completed: false 
-    };
 
-    this.todoService.addTodo(newTodo);
+  // Divide o texto pelo caractere | e remove espaços extras de cada tarefa
+    const newTask = this.newTaskTitle.split('|').map(t => t.trim()).filter(t => t);
+
+    newTask.forEach(titulo => {
+      const newTodo: Todo = {
+        id: this.todoService.getTodoNewId(),
+        title: titulo,
+        completed: false
+      };
+      this.todoService.addTodo(newTodo);
+    });
+
     this.newTaskTitle = '';
     this.focusInput(); // foca novamente após adicionar
   }

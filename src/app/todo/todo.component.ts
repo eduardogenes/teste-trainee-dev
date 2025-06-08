@@ -79,4 +79,9 @@ export class TodoComponent implements OnInit {
   get labelClearAll(){
     return 'Limpar Tudo'
   }
+
+  // ordena as tarefas
+  sortTodos() {
+    this.todos.sort((a, b) => a.title.localeCompare(b.title));
+  }
 }

@@ -34,12 +34,12 @@ export class TodoItemComponent {
     this.editTitle = this.todo.title;
   }
 
-  // Salva as alterações
+  // salva as alterações
   saveEdit(): void {
     const newTitle = this.editTitle.trim();
     if (newTitle) {  // Só salva se não estiver vazio
       this.todo.title = newTitle;
-      this.updatedTodo.emit(this.todo);  // Notifica o componente pai
+      this.updatedTodo.emit(this.todo);
       this.isEditing = false;
     }
   }

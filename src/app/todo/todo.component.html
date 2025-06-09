@@ -16,7 +16,12 @@
     <button (click)="clearCompletedTasks()">Limpar Tarefas Concluídas</button>
     <!-- botão para limpar todas as tarefas -->
     <button (click)="clearAll()" [innerHTML]="labelClearAll"></button>
+    <!-- botão para exportar para PDF -->
+    <button (click)="gerarPDF()" class="btn-export">
+      <i class="fas fa-file-pdf"></i> Exportar para PDF
+    </button>
   </div>
+
   <!-- lista de tarefas -->
   <div class="todo-list_container">
     <div class="todo-list_todo">

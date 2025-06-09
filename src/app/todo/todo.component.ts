@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../shared/models/todo.model';
 import { TodoService } from '../shared/services/todo.service';
+import { jsPDF } from 'jspdf';
 
 // Componente principal da aplicação
 @Component({
@@ -84,4 +85,28 @@ export class TodoComponent implements OnInit {
   sortTodos() {
     this.todos.sort((a, b) => a.title.localeCompare(b.title));
   }
+  
+  // gera um PDF com as tarefas
+
+  gerarPDF() {
+    const doc = new jsPDF();
+    
+    // Título
+    doc.setFontSize(22);
+    doc.text('Lista de Tarefas', 20, 20);
+    
+    // Data
+    doc.setFontSize(12);
+    doc.text(`Gerado em: ${new Date().toLocaleDateString()}`, 20, 30);
+    
+    // Tarefas
+    let y = 50;
+    this.todos.forEach((todo, index) => {
+      doc.text(`${index + 1}. ${todo.title} - ${todo.completed ? 'Concluída' : 'Pendente'}`, 20, y);
+      y += 10;
+    });
+    
+    doc.save('lista-de-tarefas.pdf');
+  }
+
 }

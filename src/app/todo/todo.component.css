@@ -54,3 +54,19 @@
   border-radius: 0.2rem;
 }
 
+.btn-export {
+  background-color: #e74c3c !important;
+  color: white !important;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.btn-export:hover {
+  background-color: #c0392b !important;
+}

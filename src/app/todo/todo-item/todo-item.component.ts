@@ -17,23 +17,15 @@ export class TodoItemComponent {
 
   constructor(private todoService: TodoService) {}
 
-  // remove tarefa unica
-  deleteTodo(): void {
-    Swal.fire({
-      title: 'Tem certeza?',
-      text: "Esta ação não pode ser desfeita!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, remover!',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.todoService.deleteTodo(this.todo.id);
-        Swal.fire('Pronto!', 'Tarefa removida com sucesso.', 'success');
+  // remove uma tarefa
+  deleteTodo(todoId: number) {
+    this.todoService.confirmarExclusao(
+      'Tem certeza que deseja excluir esta tarefa?',
+      () => {
+        this.todoService.deleteTodo(todoId);
+        this.deletedTodo.emit(todoId);
       }
-    });
+    );
   }
 
   // atualiza tarefa

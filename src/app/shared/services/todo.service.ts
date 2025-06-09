@@ -90,7 +90,7 @@ export class TodoService {
     });
   }
 
-// remove todas as tarefas
+  // remove todas as tarefas
   clearAll(): void {
     this.todos = [];
     this.updateLocalStorageAndSave();
@@ -98,28 +98,25 @@ export class TodoService {
 
 // remove as tarefas completadas
   clearCompletedTasks(): void {
-    this.todos = this.todos.filter(({ completed }) => completed === false);
+    this.todos = this.todos.filter(todo => !todo.completed);
     this.updateLocalStorageAndSave();
   }
 
-// confirma a exclusão com sweetalert2
-  confirmarExclusao() {
-    return Swal.fire({
-      title: "Tem certeza?",
-      text: "Você não poderá reverter isso!",
-      icon: "warning",
+  // Método central de confirmação com SweetAlert2
+  confirmarExclusao(mensagem: string, onConfirm: () => void) {
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: mensagem,
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sim, excluir!",
-      cancelButtonText: "Cancelar"
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "Excluído!",
-          text: "Tarefa excluída com sucesso.",
-          icon: "success"
-        });
+        onConfirm();
+        Swal.fire('Pronto!', 'Ação realizada com sucesso.', 'success');
       }
     });
   }

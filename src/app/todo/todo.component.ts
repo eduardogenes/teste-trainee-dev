@@ -44,49 +44,28 @@ export class TodoComponent implements OnInit {
     this.todoService.updateTodo(updatedTodo);
   }
 
-  // remove uma tarefa
-  deleteTodo(todoId: number) {
-    this.todoService.deleteTodo(todoId);
-  }
-
   // remove todas as tarefas
   clearAll() {
-    Swal.fire({
-      title: 'Tem certeza?',
-      text: "Esta ação não pode ser desfeita!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, remover!',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.todoService.clearAll();
-        this.loadTodos();
-        Swal.fire('Pronto!', 'Todas as tarefas foram removidas.', 'success');
-      }
-    });
+    if (this.todos.length > 0) {
+      this.todoService.confirmarExclusao(
+        'Deseja limpar todas as tarefas?',
+        () => {
+          this.todoService.clearAll();
+          this.loadTodos();
+        }
+      );
+    }
   }
 
   // remove as tarefas concluídas
   clearCompletedTasks() {
-    Swal.fire({
-      title: 'Tem certeza?',
-      text: "Esta ação não pode ser desfeita!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sim, remover!',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
+    this.todoService.confirmarExclusao(
+      'Tem certeza que deseja limpar as tarefas concluídas?',
+      () => {
         this.todoService.clearCompletedTasks();
         this.loadTodos();
-        Swal.fire('Pronto!', 'Tarefas concluídas removidas com sucesso.', 'success');
       }
-    });
+    );
   }
 
   // alterna a visibilidade das tarefas concluídas

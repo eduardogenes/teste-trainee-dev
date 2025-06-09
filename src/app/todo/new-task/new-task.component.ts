@@ -3,6 +3,7 @@ import { Todo } from '../../shared/models/todo.model';
 import { TodoService } from '../../shared/services/todo.service';
 import { Filter } from 'bad-words';
 import { PORTUGUESE_BAD_WORDS } from '../../shared/utils/badwords-ptbr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-new-task',
@@ -47,13 +48,21 @@ export class NewTaskComponent implements AfterViewInit {
     
     // verifica se o campo está vazio
     if (!taskText) {
-      alert('Por favor, insira um título para a tarefa.');
-      return;
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Por favor, insira um título para a tarefa.',
+      });
+        return;
     }
 
     // verifica se contém palavras ofensivas
     if (this.filter.isProfane(taskText)) {
-      alert('Não é permitido cadastrar tarefas com palavras ofensivas.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Não é permitido cadastrar tarefas com palavras ofensivas.',
+      });
       return;
     }
 

@@ -2,35 +2,47 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Todo } from '../../shared/models/todo.model';
 import { TodoService } from '../../shared/services/todo.service';
 import { Filter } from 'bad-words';
+import { PORTUGUESE_BAD_WORDS } from '../../shared/utils/badwords-ptbr';
 
 @Component({
   selector: 'app-new-task',
   templateUrl: './new-task.component.html',
   styleUrls: ['./new-task.component.css']
 })
-
-// componente para adicionar uma nova tarefa
 export class NewTaskComponent implements AfterViewInit {  
   newTaskTitle: string = '';
+  private filter: any;
 
   @ViewChild('newTaskInput') newTaskInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService) {
+    // Inicializa o filtro com configurações personalizadas
+    this.filter = new Filter({ 
+      emptyList: false, // Começa com lista vazia
+      regex: /\w*|\W*/g,
+      replaceRegex: /[\w\s]/g,
+      splitRegex: /\s+/,
+      placeHolder: '*',
+    });
+    
+    // Adiciona as palavras ofensivas em português
+    if (this.filter.addWords) {
+      this.filter.addWords(...PORTUGUESE_BAD_WORDS);
+    }
+  }
 
   // mantém o foco após adicionar tarefa
   focusInput() {
     this.newTaskInput.nativeElement.focus();
   }
 
-  // executa após a inicialização do componente
+  // foca no input assim que o componente aparece
   ngAfterViewInit() {
-    // foca no input assim que o componente aparece
     this.focusInput();
   }
 
   // adiciona uma nova tarefa
   addTask() {
-    const filter = new Filter();
     const taskText = this.newTaskTitle.trim();
     
     // verifica se o campo está vazio
@@ -40,7 +52,7 @@ export class NewTaskComponent implements AfterViewInit {
     }
 
     // verifica se contém palavras ofensivas
-    if (filter.isProfane(taskText)) {
+    if (this.filter.isProfane(taskText)) {
       alert('Não é permitido cadastrar tarefas com palavras ofensivas.');
       return;
     }
@@ -59,7 +71,7 @@ export class NewTaskComponent implements AfterViewInit {
     });
 
     this.newTaskTitle = '';
-    // foca no input assim que a tarefa é adicionada
+    // foca no input após adicionar tarefa
     this.focusInput();
   }
 }

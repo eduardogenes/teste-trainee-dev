@@ -47,6 +47,7 @@ export class TodoItemComponent {
   // Cancela a edição
   cancelEdit(): void {
     this.isEditing = false;
+    this.editTitle = this.todo.title;
   }
 
 }

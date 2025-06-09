@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../shared/models/todo.model';
 import { TodoService } from '../shared/services/todo.service';
 import { jsPDF } from 'jspdf';
+import Swal from 'sweetalert2';
 
 // Componente principal da aplicação
 @Component({
@@ -50,18 +51,42 @@ export class TodoComponent implements OnInit {
 
   // remove todas as tarefas
   clearAll() {
-    if (this.todos.length > 0 && confirm('Tem certeza que deseja remover todas as tarefas?')) {
-      this.todoService.clearAll();
-      this.loadTodos();
-    }
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Esta ação não pode ser desfeita!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, remover!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.todoService.clearAll();
+        this.loadTodos();
+        Swal.fire('Pronto!', 'Todas as tarefas foram removidas.', 'success');
+      }
+    });
   }
 
   // remove as tarefas concluídas
   clearCompletedTasks() {
-    if (this.todos.length > 0 && confirm('Tem certeza que deseja remover as tarefas concluídas?')) {
-      this.todoService.clearCompletedTasks();
-      this.loadTodos();
-    }
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Esta ação não pode ser desfeita!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, remover!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.todoService.clearCompletedTasks();
+        this.loadTodos();
+        Swal.fire('Pronto!', 'Tarefas concluídas removidas com sucesso.', 'success');
+      }
+    });
   }
 
   // alterna a visibilidade das tarefas concluídas

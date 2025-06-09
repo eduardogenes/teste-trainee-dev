@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Todo } from '../../shared/models/todo.model';
 import { TodoService } from '../../shared/services/todo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-todo-item',
@@ -16,14 +17,26 @@ export class TodoItemComponent {
 
   constructor(private todoService: TodoService) {}
 
-  // remove a tarefa
+  // remove tarefa unica
   deleteTodo(): void {
-    if (confirm('Tem certeza que deseja remover esta tarefa?')) {
-      this.todoService.deleteTodo(this.todo.id);
-    }
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Esta ação não pode ser desfeita!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, remover!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.todoService.deleteTodo(this.todo.id);
+        Swal.fire('Pronto!', 'Tarefa removida com sucesso.', 'success');
+      }
+    });
   }
 
-  // atualiza a tarefa
+  // atualiza tarefa
   onTaskChecked(): void {
     this.todoService.updateTodo(this.todo);
   }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Todo } from '../models/todo.model';
+import Swal from 'sweetalert2';
+
 
 @Injectable({
   providedIn: 'root'
@@ -89,14 +91,37 @@ export class TodoService {
   }
 
 // remove todas as tarefas
-  clearAll() {
+  clearAll(): void {
     this.todos = [];
     this.updateLocalStorageAndSave();
   }
 
 // remove as tarefas completadas
-  clearCompletedTasks() {
+  clearCompletedTasks(): void {
     this.todos = this.todos.filter(({ completed }) => completed === false);
     this.updateLocalStorageAndSave();
   }
+
+// confirma a exclusão com sweetalert2
+  confirmarExclusao() {
+    return Swal.fire({
+      title: "Tem certeza?",
+      text: "Você não poderá reverter isso!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, excluir!",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Excluído!",
+          text: "Tarefa excluída com sucesso.",
+          icon: "success"
+        });
+      }
+    });
+  }
+
 }

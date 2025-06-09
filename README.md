@@ -1,9 +1,14 @@
 # Relatório Técnico - Eduardo Genes
 
+
 ## 1. Visão Geral da Solução
 
 Este projeto é um Todo List desenvolvido em Angular, entregue inicialmente com bugs críticos e usabilidade comprometida. Assumi o desafio de refatorar, corrigir todos os erros apontados pelo QA e implementar melhorias, incluindo novas funcionalidades e boas práticas de organização do código.
 
+### Demonstração Online
+
+- O projeto está está hospedado na Vercel:  
+👉 [Todo List](https://teste-trainee-dev-lcth.vercel.app/#/todo)
 ---
 
 ## 2. Como Executar a Aplicação

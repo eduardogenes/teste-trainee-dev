@@ -5,20 +5,20 @@
   </div>
   <div class="todo-buttons">
     <!-- botao para ordernar de A - Z -->
-    <button class="toggle-button" (click)="sortTodos()">
+    <button class="toggle-button" (click)="sortTodos()" title="Ordenar tarefas por ordem alfabética">
       Ordenar (A-Z)
     </button>
     <!-- botão para alternar a visibilidade das tarefas concluídas -->
-    <button class="toggle-button" (click)="toggleCompletedTasks()">
+    <button class="toggle-button" (click)="toggleCompletedTasks()" title="Mostrar ou ocultar tarefas concluídas">
       {{ showCompletedTasks ? 'Ocultar Tarefas Concluídas' : 'Mostrar Tarefas Concluídas' }}
     </button>
     <!-- botão para limpar as tarefas concluídas -->
-    <button (click)="clearCompletedTasks()">Limpar Tarefas Concluídas</button>
+    <button (click)="clearCompletedTasks()" title="Limpar tarefas concluídas">Limpar Tarefas Concluídas</button>
     <!-- botão para limpar todas as tarefas -->
-    <button (click)="clearAll()" [innerHTML]="labelClearAll"></button>
+    <button (click)="clearAll()" [innerHTML]="labelClearAll" title="Limpar todas as tarefas"></button>
     <!-- botão para exportar para PDF -->
-    <button (click)="gerarPDF()" class="btn-export">
-      <i class="fas fa-file-pdf"></i> Exportar para PDF
+    <button (click)="gerarPDF()" class="btn-export" title="Exportar todos para PDF">
+      <i class="fas fa-file-pdf"></i> PDF
     </button>
   </div>
 

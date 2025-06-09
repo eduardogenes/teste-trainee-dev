@@ -36,13 +36,14 @@
   gap: 1.5rem;
   margin-right: 5rem;
   flex-wrap: wrap;
-}
-
-.toggle-button {
-  width: 13rem;
+  
 }
 
 .todo-buttons button {
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  height: 1.5rem;
   background-color: transparent;
   border: none;
   font-weight: 700;
@@ -51,7 +52,7 @@
   border:  1px solid #413F3F;
   padding: 0 0.5rem;
   box-shadow: 1px 1px;
-  border-radius: 0.2rem;
+  border-radius: 0.4rem;
 }
 
 .btn-export {
@@ -59,14 +60,17 @@
   color: white !important;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 16px 0;
+  margin: 1rem;
 }
 
+.todo-buttons button:hover {
+  filter: brightness(1.2);
+}
 .btn-export:hover {
   background-color: #c0392b !important;
 }
+

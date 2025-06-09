@@ -36,14 +36,14 @@
     <button 
       *ngIf="!isEditing" 
       (click)="startEditing()" 
-      class="todo-item_edit"
+      class="todo-item_edit" title="Editar tarefa"
     >
-      <i class="fas fa-edit fa-lg"></i> Editar
+      <i class="fas fa-edit fa-lg"></i>
     </button>
     
     <!-- Botão Remover -->
-    <button (click)="deleteTodo(todo.id)" class="todo-item_delete">
-      <i class="fas fa-trash-alt fa-lg"></i> Remover
+    <button (click)="deleteTodo(todo.id)" class="todo-item_delete" title="Remover tarefa">
+      <i class="fas fa-trash-alt fa-lg"></i> 
     </button>
 
   </div>

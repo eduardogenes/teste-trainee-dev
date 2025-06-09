@@ -36,20 +36,16 @@
 }
 
 .todo-item_edit{
-  color: blue;
+  color: rgb(74, 74, 174);
   width: fit-content;
+  border: none;
 }
 .todo-item_delete {
   width: fit-content;
-  color: red;
+  color: rgb(244, 75, 75);
   background: none;
   border: none;
   cursor: pointer;
-}
-
-
-.fa-trash-alt:hover {
-  color: rgba(65, 63, 63, 0.62);
 }
 
 /* Estilo para o input de edição */
@@ -80,3 +76,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+button:hover {
+  filter: brightness(1.2);
+}
+
